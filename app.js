@@ -11,6 +11,9 @@ mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => console.log("Connected to MongoDB successfully"))
   .catch(err => console.log(err));
+  
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
   const user = new User({
@@ -23,8 +26,6 @@ app.get("/", (req, res) => {
 });
 app.use("/api/users", users);
 app.use("/api/tweets", tweets);
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 
 const port = process.env.PORT || 5000;
 
